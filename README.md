@@ -21,4 +21,4 @@ Install library dependencies (preferably using Python 3.8.10):
 
 Finally, execute:
 
-    python source/modalities.py
+    python app.py
