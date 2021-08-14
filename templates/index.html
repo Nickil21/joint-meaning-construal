@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container" style="width:100%;">
+
+  <nav class="navbar">
+    <div class="navbar-header">
+
+    <span class="navbar-brand">{{ config.APPNAME }}</span>
+    </div>
+    <form class="navbar-form navbar-left" role="search" name="goto" action="/goto" method="POST">
+      <div class="form-group">
+        <input type="text" name="index" class="form-control" placeholder="Go to index">
+      </div>
+      <button type="Go" class="btn btn-default">Go</button>
+    </form>
+    <ul class="nav navbar-nav">
+      <li><a href="/">home</a></li>
+      <li><a href="/0">chunks</a></li>
+      <li><a href="/sign_out">sign out</a></li>
+    </ul>
+  </nav>
+
+<h1 style="text-align: center;">Select a video to upload and play</h1>
+<p>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+	  {% if messages %}
+		<ul style="list-style-position: inside; text-align: center;">
+		{% for category, message in messages %}
+            <div class="{{ category }}" style="font-size: 20px;">{{ message }}</div>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+    <div style="white-space:nowrap; text-align: center;">
+        <div style="display: inline-block;">
+            <video width="640" height="480" autoplay="autoplay" controls="controls" preload="preload">
+                <source src="{{ url_for('display_video', filename=filename) }}" type="video/mp4"></source>
+            </video>
+        </div>
+    </div>
+{% endif %}
+<div class="col-md-4 col-md-offset-4">
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file"  class="btn btn-default btn-lg" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Upload" class="btn btn-success btn-lg">
+        </p>
+    </form>
+</div>
+
+
+<style>
+    .error {
+    color: red
+}
+
+    .success {
+    color: green
+}
+
+.warning {
+    color: orange
+}
+</style>
+</body>
+
+{% endblock %}
