@@ -142,3 +142,4 @@ DATA
 
 # Temp video files
 TEMP/videos/
+source/checkpoints/
