@@ -141,6 +141,5 @@ cython_debug/
 DATA
 
 # Temp video files
-TEMP/videos/
 TEMP/segments/
 source/checkpoints/
