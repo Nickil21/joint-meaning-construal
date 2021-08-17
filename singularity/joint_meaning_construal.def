@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: tensorflow/tensorflow:latest-gpu
+
+%labels
+AUTHOR nickilmaveli@gmail.com
+
+%post
+    apt-get update && apt-get -y install git ffmpeg libsm6 libxext6 -y
+    cd / && git clone https://github.com/Nickil21/joint-meaning-construal.git
+    pip3 install pandas opencv-python numpy tables joblib imageio openpyxl flask jinja2 git+https://github.com/tensorflow/docs
+
+%runscript
+    cd /joint-meaning-construal/ && python3 detect_gesture.py
